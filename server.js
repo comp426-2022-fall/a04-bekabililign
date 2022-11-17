@@ -10,12 +10,8 @@ const app = express();
 
 const port = args.port || 5000;
 
-app.use(express.json());
-app.use(express.urlencoded({ encoded: true}));
-
-app.get('/app/*', (req, res, next) => {
-    res.send('404 NOT FOUND');
-})
+// app.use(express.json());
+// app.use(express.urlencoded({ encoded: true}));
 
 app.get('/app/', (req, res, next) => {
     res.send("200 OK").end();
@@ -37,6 +33,9 @@ app.get('/app/roll/:sides/:dice/:rolls/', (req, res, next) => {
     res.send(roll(req.params.sides, req.params.dice, req.params.rolls)).end();
 })
 
+app.get('/app/*', (req, res, next) => {
+    res.send('404 NOT FOUND');
+})
 
 // app.post('/app/roll/:sides/', (req, res, next) => {
 //     console.log(roll(req.params.sides, 2, 1)) // this gets logged to the node tab

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 import minimist from 'minimist';
 import express from 'express';
@@ -8,8 +9,8 @@ const app = express();
 
 const port = args.port || 5000;
 
-// app.use(express.json());
-// app.use(express.urlencoded({ encoded: true}));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get('/app/', (req, res, next) => {
     res.send("200 OK").end();
@@ -17,6 +18,10 @@ app.get('/app/', (req, res, next) => {
 
 app.get('/app/roll/', (req, res, next) => {
     res.send(roll(6, 2, 1)).end();
+})
+
+app.post('/app/roll/', (req, res, next) => {
+    res.send(roll(parseInt(req.body.sides), parseInt(req.body.dice), parseInt(req.body.rolls))).end();
 })
 
 app.get('/app/roll/:sides/', (req, res, next) => {
